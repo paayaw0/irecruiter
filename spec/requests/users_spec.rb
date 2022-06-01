@@ -21,8 +21,8 @@ RSpec.describe "Users", type: :request do
     context 'success' do 
       before { post '/signup', params: user_credentials }
       
-      it 'respond with 200 status' do 
-        expect(response).to have_http_status(200)
+      it 'respond with 201 status' do 
+        expect(response).to have_http_status(201)
       end
 
       it 'return auth token' do 

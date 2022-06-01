@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
       payload = { user_id: user.id, email: user.email }
       auth_token = JsonWebToken.encode(payload)
-      json_response({ auth_token: auth_token, message: 'Account created successfully!' })
+      json_response({ auth_token: auth_token, message: 'Account created successfully!' }, 201)
     end 
 
     def destroy 
