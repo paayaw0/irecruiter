@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
     def create
       user = User.create!(user_params)
-      render json: { user: user }, status: :ok
+      json_response({user: user})
     end 
 
     def destroy 

@@ -17,8 +17,7 @@ RSpec.describe "Users", type: :request do
     end
 
     it 'return created user' do 
-      response_body = HashWithIndifferentAccess.new(JSON.parse(response.body))
-      expect(response_body[:user]['email']).to eq(user.email)
+      expect(json[:user][:email]).to eq(user.email)
     end
   end
 end
