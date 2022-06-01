@@ -47,7 +47,7 @@ RSpec.describe "Authentication", type: :request do
       end
 
       it 'return message' do 
-        expect(json[:message]).to eq('Log in failed')
+        expect(json[:message]).to eq('Invalid credentials')
       end
     end
   end
