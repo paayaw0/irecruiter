@@ -9,15 +9,45 @@ RSpec.describe "Users", type: :request do
       password_confirmation: user.password }
   }.to_json
 
+  let(:invalid_user_credentials) {
+    {
+      email: 'fake@email.com',
+      name: 'fakename',
+      password: 'foobar',
+      password_confirmation: 'password'    }
+  }.to_json
+
   describe 'signup via post /signup' do 
-    before { post '/signup', params: user_credentials }
-    
-    it 'respond with 200 status' do 
-      expect(response).to have_http_status(200)
+    context 'success' do 
+      before { post '/signup', params: user_credentials }
+      
+      it 'respond with 200 status' do 
+        expect(response).to have_http_status(200)
+      end
+
+      it 'return auth token' do 
+        expect(json[:auth_token]).not_to be_nil
+      end
+
+      it 'returns message' do  
+        expect(json[:message]).to eq('Account created successfully!')
+      end
     end
 
-    it 'return created user' do 
-      expect(json[:user][:email]).to eq(user.email)
+    context 'failure' do
+      before { post '/signup', params: invalid_user_credentials }
+      
+      it 'respond with 200 status' do 
+        expect(response).to have_http_status(422)
+      end
+
+      it 'return auth token' do 
+        expect(json[:auth_token]).to be_nil
+      end
+
+      it 'returns message' do  
+        expect(json[:message]).to eq("Validation failed: Password confirmation doesn't match Password")
+      end
     end
   end
 end
