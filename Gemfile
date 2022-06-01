@@ -43,12 +43,12 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'rspec-rails'
   gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+  gem 'database_cleaner-active_record'
+  gem 'shoulda-matchers', '~> 5.0'
 end
 
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-  gem 'database_cleaner-active_record'
-  gem 'shoulda-matchers'
 end
 
